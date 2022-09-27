@@ -7,17 +7,13 @@ import {
   CardActions,
   CardHeader,
   CardMedia,
-  List,
-  ListItem,
   Box
 } from "@mui/material";
 
-const ListaColores = () => {
+const ListaColores = (props) => {
   return (
-    <List>
-      <ListItem>
-        <Card>
-          <CardHeader title="Nombre color"></CardHeader>
+        <Card sx={{ maxWidth: 1/2 }}>
+          <CardHeader title={props.titulo}></CardHeader>
           <CardMedia>
             <CardActionArea>
               <Box
@@ -27,19 +23,19 @@ const ListaColores = () => {
                 sx={{
                   width: 100,
                   height: 100,
-                  backgroundColor: "primary.dark",
+                  backgroundColor: `${props.colorFondo}`
                 }}
               ></Box>
             </CardActionArea>
           </CardMedia>
           <CardActions className="justify-content-end">
-            <Button type="button" variant="outlined" color="error">
+            <Button type="button" variant="outlined" color="error"
+            // onClick={() => eliminarColor(props.nombreColor)}
+            >
               Borrar
             </Button>
           </CardActions>
         </Card>
-      </ListItem>
-    </List>
   );
 };
 
