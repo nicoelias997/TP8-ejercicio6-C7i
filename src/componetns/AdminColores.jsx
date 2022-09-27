@@ -1,6 +1,5 @@
 import React from "react";
 
-
 import {
   Card,
   CardActionArea,
@@ -11,9 +10,11 @@ import {
   CardActions,
   Button
 } from "@mui/material";
+import ListaColores from "./ListaColores";
 
 const AdminColores = () => {
   return (
+    <div className="container">
       <Card xs={12} sx={{ maxWidth: "80%" }}>
         <CardHeader title="Administrar colores"></CardHeader>
         <CardMedia>
@@ -46,6 +47,10 @@ const AdminColores = () => {
         </Button>
         </CardActions>
       </Card>
+      
+      <ListaColores></ListaColores>
+      </div>
+    
   );
 };
 
