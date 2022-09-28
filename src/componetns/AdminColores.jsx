@@ -49,25 +49,27 @@ const AdminColores = () => {
     }
 
   return (
-    <div className="container-fluid">
+    <div className="container-fluid mt-2">
       <Card xs={12} sx={{ maxWidth: "100%"}} mb={2}>
         <CardHeader title="Administrar colores"></CardHeader>
         <CardMedia>
           <CardActionArea sx={{ backgroundColor: "#e3f2fd" }}>
-            <div className="row d-flex justify-content-center align-items-center">
+            <div id="cajaAdmin">
               <Box
+              id="boxAdmin"
                 sx={{
                   width: 100,
                   height: 100,
                   backgroundColor: "primary.dark",
                   marginTop: 3,
                   marginBottom: 3,
-                  marginRight: 4,
+                  marginRight: 1,
                 }}
               />
               <OutlinedInput
-                className="col-12 col-sm-12- col-md-6"
-                style={{ maxHeight: "5px" }}
+                id="inputAdmin"
+                style={{ maxHeight: "5px", maxWidth: "80%" }}
+                sx={{marginBottom:"15px"}}
                 autoFocus
                 type="text"
                 placeholder="Elegir color. Ej: lightBlue"
@@ -89,10 +91,12 @@ const AdminColores = () => {
           </Button>
         </CardActions>
       </Card>
-    <div className="d-flex justify-content-evenly">
-      <List className="list-group row" spacing={2}>
+
+      <List spacing={2} 
+      id="listaColor"
+      xs={12} sm={12} md={12}>
         {arrayColor.map((item) => (
-          <ListItem key={item.id} className="list-group-item">
+          <ListItem key={item.id} id="listaItem">
             <ListaColores
             eliminarColor={() => eliminarColor(item.id)}
               colorFondo={item.nombreColor}
@@ -101,7 +105,6 @@ const AdminColores = () => {
           </ListItem>
         ))}
       </List>
-    </div>
 
     </div>
 

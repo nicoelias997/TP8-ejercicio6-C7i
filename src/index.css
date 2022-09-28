@@ -1,13 +1,114 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+#listaColor{
+  overflow-x: hidden;
+  display: flex;
+  flex-wrap: wrap;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+#cajaAdmin{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
+#boxAdmin{
+  background-color: none;
+}
+#inputAdmin{
+  width: 250px;
+}
+@media screen and (min-width: 961px){
+  
+  #listaItem{
+    justify-content: center;
+    width: 25%;
+  } 
+}
+
+@media screen and (max-width: 960px){
+  #listaItem{
+    justify-content: center;
+    width: 33.3%;
+  } 
+}
+
+@media screen and (max-width: 768px){
+  #listaItem{
+    justify-content: center;
+    width: 50%;
+  } 
+}
+
+@media screen and (max-width: 500px){
+  #listaItem{
+    justify-content: center;
+    width: 100%;
+  } 
+}
+
+@media screen and (min-width: 800px) {
+  #inputAdmin{
+    width: 450px;
+  }
+}
+
+
+/* @media screen and (min-width: 375px){
+  #cajaAdmin{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-direction: row;
+  } 
+  #in
+  #inputAdmin{
+    text-align: center;
+    width: 50px;
+  }
+} */
+
+/* @media screen and (max-width: 539px){
+  #cajaAdmin{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+  } 
+  #inputAdmin{
+    text-align: center;
+    width: 300px;
+  }
+}
+@media screen and (max-width: 800px){
+  #cajaAdmin{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-direction: row;
+  } 
+  
+  #inputAdmin{
+    text-align: center;
+    width: 400px;
+  }
+} */
+/* @media screen and (min-width: 801px){
+  #cajaAdmin{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-direction: row;
+  } 
+  
+  #inputAdmin{
+    text-align: center;
+    width: 500px;
+  }
+} */
+
+
+
+
