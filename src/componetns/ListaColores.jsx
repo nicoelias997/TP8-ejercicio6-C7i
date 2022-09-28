@@ -12,18 +12,6 @@ import {
 
 
 const ListaColores = (props) => {
-
-  const storageColores = JSON.parse(localStorage.getItem("listaColores")) || [];
-
-  const eliminarColor = (color) => {
-    for(let propiedades in storageColores){  
-      if(storageColores[propiedades].nombreColor === color){
-        console.log(color)
-      }
-    }
-  }
-
-
   return (
         <Card sx={{ 
           maxWidth: 1 }}>
@@ -45,7 +33,7 @@ const ListaColores = (props) => {
           </CardMedia>
           <CardActions className="justify-content-end">
             <Button type="button" variant="outlined" color="error"
-            onClick={() => eliminarColor(props.colorFondo)}
+            onClick={props.eliminarColor}
             >
               Borrar
             </Button>

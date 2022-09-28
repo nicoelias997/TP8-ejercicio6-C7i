@@ -43,6 +43,11 @@ const AdminColores = () => {
     }
   };
 
+  const eliminarColor = (color) => {
+    const arrayFiltrado = arrayColor.filter(item => item.id !== color)
+    setArrayColor(arrayFiltrado)
+    }
+
   return (
     <div className="container-fluid">
       <Card xs={12} sx={{ maxWidth: "100%"}} mb={2}>
@@ -89,6 +94,7 @@ const AdminColores = () => {
         {arrayColor.map((item) => (
           <ListItem key={item.id} className="list-group-item">
             <ListaColores
+            eliminarColor={() => eliminarColor(item.id)}
               colorFondo={item.nombreColor}
               titulo={item.nombreColor}
             ></ListaColores>
