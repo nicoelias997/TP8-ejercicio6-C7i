@@ -10,27 +10,42 @@ import {
   Box
 } from "@mui/material";
 
+
 const ListaColores = (props) => {
+
+  const storageColores = JSON.parse(localStorage.getItem("listaColores")) || [];
+
+  const eliminarColor = (color) => {
+    for(let propiedades in storageColores){  
+      if(storageColores[propiedades].nombreColor === color){
+        console.log(color)
+      }
+    }
+  }
+
+
   return (
-        <Card sx={{ maxWidth: 1/2 }}>
-          <CardHeader title={props.titulo}></CardHeader>
+        <Card sx={{ 
+          maxWidth: 1 }}>
+          <CardHeader title={props.titulo.toUpperCase()}></CardHeader>
           <CardMedia>
-            <CardActionArea>
-              <Box
-              ml={4.5}
-              mt={1}
-              mb={1}
+            <CardActionArea sx={{
+              backgroundColor: "#e3f2fd"
+            }}>
+              <Box 
                 sx={{
                   width: 100,
                   height: 100,
-                  backgroundColor: `${props.colorFondo}`
+                  backgroundColor: `${props.colorFondo}`,
+                  padding: 10,
+                  margin: 3
                 }}
               ></Box>
             </CardActionArea>
           </CardMedia>
           <CardActions className="justify-content-end">
             <Button type="button" variant="outlined" color="error"
-            // onClick={() => eliminarColor(props.nombreColor)}
+            onClick={() => eliminarColor(props.colorFondo)}
             >
               Borrar
             </Button>

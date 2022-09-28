@@ -25,7 +25,7 @@ export const validarColor = (color) => {
         if(color === colores[i]){
             return true
         }
-        }
+        } 
     }
 
 
