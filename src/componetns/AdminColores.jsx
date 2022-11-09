@@ -17,17 +17,26 @@ import {
 
 import ListaColores from "./ListaColores";
 import { validarColor } from "../colores";
+import { consultarAPI, crearColorAPI, editarColorApi, eliminarColorApi, obtenerColorApi } from "../queries";
+import { useState } from "react";
 
 const AdminColores = () => {
   
-  const storageColores = JSON.parse(localStorage.getItem("listaColores")) || [];
+  // const storageColores = JSON.parse(localStorage.getItem("listaColores")) || [];
 
   const [color, setColor] = React.useState("");
-  const [arrayColor, setArrayColor] = React.useState(storageColores);
+  const [arrayColor, setArrayColor] = React.useState([]);
+  const [id, setId] = useState("")
+  const [modoEdicion, setModoEdicion] = useState(false)
+
+  const [editando, setEditando] = useState("")
 
   React.useEffect(() => {
-    localStorage.setItem("listaColores", JSON.stringify(arrayColor));
-  }, [arrayColor]);
+    // localStorage.setItem("listaColores", JSON.stringify(arrayColor));
+    consultarAPI().then(respuesta => {
+      setArrayColor(respuesta)
+    })
+  }, []);
 
   const agregarColor = () => {
     if (!validarColor(color) || !color.trim()) {
@@ -35,17 +44,72 @@ const AdminColores = () => {
         icon: "info",
         html: "<p>Indica un color, prueba en <strong>Ingles</strong><br>Ej: blue, red, deepOrange</p>",
       });
-      setColor("");
       return;
     } else {
-      setArrayColor([...arrayColor, { nombreColor: color, id: color }]);
-      setColor("");
+      crearColorAPI(color).then( respuesta => {
+        if(respuesta.status === 201){
+          setArrayColor([...arrayColor, { nombreColor: color, id: color }]);
+          setColor("");
+        }
+      })
     }
   };
 
-  const eliminarColor = (color) => {
-    const arrayFiltrado = arrayColor.filter(item => item.id !== color)
-    setArrayColor(arrayFiltrado)
+  const eliminarColor = (id) => {
+    eliminarColorApi(id).then(respuesta => {
+      if(respuesta.status === 200){
+       consultarAPI().then(colores => {
+        setArrayColor(colores)
+       })
+       setId("")
+       setColor("")
+          setModoEdicion(false)
+      } else {
+        console.log("Hubo un problema al eliminar el color")
+      }
+    })
+    }
+
+    const obtenerColor = id => {
+      setId(id)
+      obtenerColorApi(id).then((respuesta) => {
+          setColor(respuesta.nombreColor)
+          setModoEdicion(true)
+          setEditando(respuesta)
+        })
+      }
+
+    const editarColor = () => {
+          editarColorApi(editando.nombreColor, editando._id).then(respuesta => {
+            if(respuesta.status === 200){
+              consultarAPI().then(respuesta => {
+                if(respuesta === 200){
+                  setArrayColor(respuesta)
+                }
+              })
+              setId("")
+              setModoEdicion(false)
+            }
+          })
+        
+      
+      // editarColorApi(datos.nombreColor, datos._id).then(respuesta => {
+      //   if(respuesta.status === 200){
+      //       Swal.fire(
+      //         "Tarea editada",
+      //         "La tarea fue editado exitosamente",
+      //         "success"
+      //       )
+      //     consultarAPI().then(respuesta => {
+      //       setArrayColor(respuesta)
+      //     })
+      //     setModoEdicion(false)
+      //   } 
+      //   if(respuesta.status === 400) {
+      //     Swal.fire("Hubo un error", "No pudimos editar la tarea", "error")
+      //     return
+      //   }
+      // })
     }
 
   return (
@@ -81,7 +145,16 @@ const AdminColores = () => {
           </CardActionArea>
         </CardMedia>
         <CardActions className="justify-content-end mt-2 mb-2">
-          <Button
+          {
+            modoEdicion ? <Button
+            variant="contained"
+            type="submit"
+            value={color}
+            onClick={() => editarColor()}
+          >
+            Editar
+          </Button> : 
+            <Button
             variant="contained"
             type="submit"
             value={color}
@@ -89,6 +162,7 @@ const AdminColores = () => {
           >
             Guardar
           </Button>
+          }
         </CardActions>
       </Card>
 
@@ -96,11 +170,14 @@ const AdminColores = () => {
       id="listaColor"
       xs={12} sm={12} md={12}>
         {arrayColor.map((item) => (
-          <ListItem key={item.id} id="listaItem">
+          <ListItem  id="listaItem">
+
             <ListaColores
-            eliminarColor={() => eliminarColor(item.id)}
+            key={item._id}
+            eliminarColor={() => eliminarColor(item._id)}
               colorFondo={item.nombreColor}
               titulo={item.nombreColor}
+              editarColor={() => obtenerColor(item._id)}
             ></ListaColores>
           </ListItem>
         ))}

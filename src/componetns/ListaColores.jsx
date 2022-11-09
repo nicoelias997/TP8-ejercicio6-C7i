@@ -32,6 +32,11 @@ const ListaColores = (props) => {
             </CardActionArea>
           </CardMedia>
           <CardActions className="justify-content-end">
+          <Button type="button" variant="outlined" color="success"
+            onClick={props.editarColor}
+            >
+              Editar
+            </Button>
             <Button type="button" variant="outlined" color="error"
             onClick={props.eliminarColor}
             >
